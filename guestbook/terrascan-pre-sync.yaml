@@ -44,11 +44,12 @@ spec:
            - /go/bin/terrascan
            - version
          periodSeconds: 10
-       #if want to use private repo
        volumeMounts:
          - mountPath: /data
            name: notification-scripts
            readOnly: true
+           configMap:
+             name: slack-notifications
 
      restartPolicy: Never
  backoffLimit: 1
