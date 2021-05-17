@@ -24,7 +24,7 @@ spec:
        command: ["/bin/sh", "-c"]
        args:
        - >
-         /go/bin/terrascan scan -r git -u https://github.com/cesar-rodriguez/argocd-example-apps.git//guestbook -i k8s -t k8s | /data/notify_slack.sh argocd-terrascan terrascan https://hooks.slack.com/services/TXXXXXXXX/XXXXXXXXXXX/0XXXXXXXXXXXXXXXXXX
+         /go/bin/terrascan scan -r git -u https://github.com/cesar-rodriguez/argocd-example-apps.git//guestbook -i k8s -t k8s
        securityContext:
          seccompProfile:
            type: RuntimeDefault
@@ -44,12 +44,6 @@ spec:
            - /go/bin/terrascan
            - version
          periodSeconds: 10
-       volumeMounts:
-         - mountPath: /data
-           name: notification-scripts
-           readOnly: true
-           configMap:
-             name: slack-notifications
 
      restartPolicy: Never
  backoffLimit: 1
