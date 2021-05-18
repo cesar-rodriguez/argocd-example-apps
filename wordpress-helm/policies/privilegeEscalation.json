@@ -1,0 +1,10 @@
+{
+    "name": "privilegeEscalationCheck",
+    "file": "privilegeEscalationCheck.rego",
+    "template_args": null,
+    "severity": "HIGH",
+    "description": "Containers Should Not Run with AllowPrivilegeEscalation",
+    "reference_id": "AC-K8-CA-PO-H-0165",
+    "category": "Identity and Access Management",
+    "version": 1
+}
