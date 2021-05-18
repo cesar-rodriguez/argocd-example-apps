@@ -8,53 +8,47 @@ spec:
   ttlSecondsAfterFinished: 3600
   template:
     spec:
-      volumes:
-        - name: policies-volume
-          configMap:
-            name: policies
       securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - name: terrascan-argocd
-          image: 'accurics/terrascan:latest'
-          resources:
-            requests:
-              cpu: '1'
-              memory: 256Mi
-            limits:
-              cpu: '1'
-              memory: 256Mi
-          command:
-            - /bin/sh
-            - '-c'
-          args:
-            - >
-              /go/bin/terrascan scan -r git -u
-              https://github.com/cesar-rodriguez/argocd-example-apps.git//guestbook
-              -i k8s -p /etc/policies
-          securityContext:
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            runAsUser: 101
-          livenessProbe:
-            exec:
-              command:
-                - /go/bin/terrascan
-                - version
-            periodSeconds: 10
-            initialDelaySeconds: 10
-          readinessProbe:
-            exec:
-              command:
-                - /go/bin/terrascan
-                - version
-            periodSeconds: 10
-          volumeMounts:
-          - name: policies-volume
-            mountPath: /etc/policies
+      - name: terrascan-argocd
+        image: 'accurics/terrascan:latest'
+        resources:
+          requests:
+            cpu: "1"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "256Mi"
+        command:
+          - /bin/sh
+          - '-c'
+        args:
+          - >
+            /go/bin/terrascan scan -r git -u https://github.com/cesar-rodriguez/argocd-example-apps.git//guestbook -i k8s --severity high
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 101
+        livenessProbe:
+          exec:
+            command:
+              - /go/bin/terrascan
+              - version
+          periodSeconds: 10
+          initialDelaySeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - /go/bin/terrascan
+              - version
+          periodSeconds: 10
+          initialDelaySeconds: 10
       restartPolicy: Never
   backoffLimit: 1
