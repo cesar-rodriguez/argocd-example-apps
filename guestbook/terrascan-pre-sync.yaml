@@ -28,7 +28,6 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
           runAsNonRoot: true
           runAsUser: 101
         livenessProbe:
