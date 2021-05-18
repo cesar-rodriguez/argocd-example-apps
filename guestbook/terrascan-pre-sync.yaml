@@ -34,6 +34,7 @@ spec:
               https://github.com/cesar-rodriguez/argocd-example-apps.git//guestbook
               -i k8s -p /etc/policies
           securityContext:
+            allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
             allowPrivilegeEscalation: false

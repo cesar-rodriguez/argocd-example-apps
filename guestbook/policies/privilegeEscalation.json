@@ -1,10 +1,21 @@
 {
     "name": "privilegeEscalationCheck",
-    "file": "privilegeEscalationCheck.rego",
-    "template_args": null,
+    "file": "securityContextCheck.rego",
+    "template_args": {
+        "allowed": "false",
+        "arg1": "cpu",
+        "arg2": "limits",
+        "name": "privilegeEscalationCheck",
+        "not_allowed": "true",
+        "param": "allowPrivilegeEscalation",
+        "param1": "securityContext",
+        "prefix": "",
+        "suffix": "",
+        "value": "true"
+    },
     "severity": "HIGH",
     "description": "Containers Should Not Run with AllowPrivilegeEscalation",
     "reference_id": "AC-K8-CA-PO-H-0165",
-    "category": "Identity and Access Management",
+    "category": "Compliance Validation",
     "version": 1
 }
