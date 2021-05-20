@@ -18,9 +18,3 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
-        securityContext:
-            seccompProfile:
-              type: RuntimeDefault
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            runAsUser: 101

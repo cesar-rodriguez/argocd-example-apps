@@ -8,6 +8,9 @@ spec:
   ttlSecondsAfterFinished: 3600
   template:
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: terrascan-argocd
         image: 'accurics/terrascan:latest'
